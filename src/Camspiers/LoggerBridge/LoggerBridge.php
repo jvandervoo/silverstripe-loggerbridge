@@ -453,13 +453,6 @@ class LoggerBridge implements \RequestFilter
         }
     
         $this->logger->$logType($errstr, $context);
-    
-        // Check the error_reporting level in comparison with the $errno (honouring the environment)
-        // And check that $showErrors is on or the site is live
-        if (($errno & $errorReporting) === $errno &&
-            ($this->showErrors || $this->getEnvReporter()->isLive())) {
-            $this->getErrorReporter()->reportError($exception);
-        }
             
         if (in_array($errno, $this->terminatingErrors)) {
             $this->terminate();
